@@ -20,6 +20,8 @@ public class FuncionarioView extends JFrame {
 	JTextArea txtLista = new JTextArea();
 	
 	public FuncionarioView() {
+		inicializar();
+		
 		FuncionarioDao funDao = new FuncionarioDao();
 		funDao.lerFuncionario();
 	}
@@ -27,8 +29,20 @@ public class FuncionarioView extends JFrame {
 	public void inicializar() {
 		this.setLayout(null);
 		
-		this.btnIr.setBounds(30, 50, 50, 70);
+		this.btnIr.setBounds(20, 40, 100, 30);
 		this.lblLista.setBounds(30, 90, 100, 70);
 		this.txtLista.setBounds(30, 130, 300, 100);
+		
+		this.getContentPane().add(btnIr);
+		this.getContentPane().add(lblLista);
+		this.getContentPane().add(txtLista);
+		
+		this.setSize(800, 500);
+		this.setVisible(true);
+		
+	}
+	
+	public void acoes() {
+		
 	}
 }
