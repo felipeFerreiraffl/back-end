@@ -2,6 +2,7 @@ package br.edu.senaisp.dao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -56,7 +57,12 @@ public class FuncionarioDao {
 				resp.add(tmp);
 			}
 		} catch (Exception e) {
-			FuncionarioLog.escrever("Não liberou o recurso: " + e.getMessage());
+			try {
+				br.close();
+			} catch (Exception e1) {
+				FuncionarioLog.escrever("Não liberou o recurso: " + e1.getMessage());
+			}
+			
 		}
 		
 		return resp;

@@ -35,6 +35,9 @@ public class FuncionarioDetView extends JFrame{
 		this.lblCpf.setBounds(50, 110, 80, 20);
 		this.txtCpf.setBounds(90, 110, 150, 30);
 		
+		this.btnOk.setBounds(50, 150, 80, 20);
+		this.btnFechar.setBounds(150, 150, 80, 20);
+		
 		this.getContentPane().add(lblId);
 		this.getContentPane().add(txtId);
 		
@@ -46,9 +49,6 @@ public class FuncionarioDetView extends JFrame{
 		
 		this.getContentPane().add(btnOk);
 		this.getContentPane().add(btnFechar);
-		
-		this.setSize(700, 450);
-		this.setVisible(true);
 		
 		btnOk.addActionListener(new ActionListener() {
 			
@@ -63,8 +63,17 @@ public class FuncionarioDetView extends JFrame{
 			}
 		
 		});
-	
+		
+		this.setSize(700, 450);
+		this.setVisible(true);
 	}
-	
+
+	public Funcionario getFunc() {
+		return func;
+	}
+
+	public void setFunc(Funcionario func) {
+		this.func = func;
+	}
 	
 }
