@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Cadastro</title>
+<style type="text/css">
+	button {
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+	<form action="/Av1_Web/inicio">
+		<h1>Cadastro</h1>
+		
+		<label for="nome">Nome:</label>
+		<input type="text" name="nome">
+		<br>
+		
+		<label for="descricao">Descrição:</label>
+		<input type="text" name="descricao">
+		<br>
+		
+		<label for="preco">Preço:</label>
+		<input type="number" name="preco">
+		<br>
+		
+		<button onclick="window.location.href = '/Av1_Web/inicio.html'">Gravar</button>
+	</form>
+	<button onclick="window.location.href = '/Av1_Web/inicio.html'">Cancelar</button>
+</body>
+</html>

@@ -8,12 +8,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/calcula") 
-public class OlaMundo extends HttpServlet {
+@WebServlet(urlPatterns = "/inicio")
+public class Registro extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String valor = req.getParameter("p1");
+		String nome = req.getParameter("nome");
+		String desc  = req.getParameter("descricao");
+		float preco = Float.parseFloat(req.getParameter("preco"));
 		
-		resp.getWriter().append("<html><h1>Olá" + valor + "</h1></html>");
+		resp.getWriter().print("<html><h1>Nome: " + nome + "</h1>"
+				+ "<h1>Descrição: " + desc + "</h1>"
+						+ "<h1>Preço: R$" + preco + "</h1></html>");
 	}
 }
