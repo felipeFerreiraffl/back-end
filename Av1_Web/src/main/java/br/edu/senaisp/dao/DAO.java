@@ -7,8 +7,7 @@ import java.sql.SQLException;
 public class DAO {
 	// Conexão com o banco de dados
 	protected static Connection conexao() 
-	        throws SQLException, ClassNotFoundException 
-	    { 
+	        throws SQLException, ClassNotFoundException { 
 	        // Initialize all the information regarding 
 	        // Database Connection 
 	        String dbDriver = "com.mysql.jdbc.Driver"; 
