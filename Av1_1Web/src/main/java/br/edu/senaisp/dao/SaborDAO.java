@@ -16,6 +16,10 @@ public class SaborDAO {
 	// Variável para selecionar os valores
 	private final String MYSQLSELECT = "SELECT id, nome, descricao, preco FROM sabores;";
 	
+	// Variável para deletar os valores
+	private final String MYSQLDELETE = "DELETE FROM sabores\r\n"
+			+ "	WHERE id = ?;";
+	
 	public void novo(Sabor sab) {
 		try {
 			Connection con = DAO.conexao();
@@ -79,6 +83,25 @@ public class SaborDAO {
 		
 		return sabores;
 		
+	}
+	
+	public void deletar(Integer id) {
+		try {
+			Connection con = DAO.conexao();
+			
+			if (!con.isClosed()) {
+				PreparedStatement ps = con.prepareStatement(MYSQLDELETE);
+				ps.setInt(1, id);
+				
+				ps.execute();
+				
+				System.out.println("Item deletado com sucesso!");
+				
+				con.close();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 }
