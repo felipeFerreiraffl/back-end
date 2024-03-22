@@ -34,6 +34,8 @@ public class RegCliente extends HttpServlet{
 		ClienteDAO dao = new ClienteDAO();
 		dao.novo(c);
 		
+		resp.sendRedirect("/Av1_1Web/listaCliente");
+		
 		resp.getWriter().print("<!DOCTYPE html>"
 				+ "<html>"
 				+ "<head>"

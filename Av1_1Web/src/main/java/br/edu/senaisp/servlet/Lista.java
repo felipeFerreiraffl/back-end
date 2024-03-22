@@ -24,14 +24,21 @@ public class Lista extends HttpServlet {
 		html.append("<head>");
 		html.append("<meta charset='UTF-8'>");
 		html.append("<title>Lista de sabores</title>");
+		html.append("</head>");
 		html.append("<body>");
-		html.append("<head>");
+		html.append("<a href=\'http://localhost:8080/AV1_1Web/cadastro.html\"><button type=\"button\">Novo</button></a>'");
 		
 		for (Sabor s : dao.lista()) {
 			html.append("<h1>").append(s.getId()).append("</h1>");
 			html.append("<h2> Nome: ").append(s.getNome()).append("</2>");
 			html.append("<h2>Descrição: ").append(s.getDescricao()).append("</h2>");
 			html.append("<h2>Preço: R$").append(s.getPreco()).append("</h2>");
+			html.append("<a href='/AV1_1Web/saborDel?id=" + s.getId() + ">");
+			html.append("<button>Excluir</button>");
+			html.append("</a>");
+			html.append("<a href='/AV1_1Web/alteraDel?id=" + s.getId() + ">");
+			html.append("<button>Alterar</button>");
+			html.append("</a>");
 			html.append("<br>");
 		}
 		

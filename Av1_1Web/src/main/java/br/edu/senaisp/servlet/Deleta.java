@@ -9,15 +9,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/del-sabor")
+@WebServlet(urlPatterns = "/saborDel")
 public class Deleta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
  
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Integer i = Integer.parseInt(req.getParameter("idDel"));
+		Integer id = Integer.parseInt(req.getParameter("id"));
 		
 		SaborDAO dao = new SaborDAO();
-		dao.deletar(i);
+		dao.deletar(id);
+		
+		resp.sendRedirect("/AV1_1Web/lista");
 	}
 
 }

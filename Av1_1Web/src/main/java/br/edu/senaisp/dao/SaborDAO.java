@@ -15,10 +15,18 @@ public class SaborDAO {
 	
 	// Variável para selecionar os valores
 	private final String MYSQLSELECT = "SELECT id, nome, descricao, preco FROM sabores;";
+
+	// Variável para selecionar os valores pelo ID
+	private final String MYSQLSELECT_ID = 
+	"SELECT id, nome, descricao, preco FROM sabor WHERE id = ?";		
 	
 	// Variável para deletar os valores
 	private final String MYSQLDELETE = "DELETE FROM sabores\r\n"
 			+ "	WHERE id = ?;";
+	
+	// Variável para deletar os valores
+	private final String MYSQLUPDATE = "UPDATE sabores\r\n"
+			+ "SET nome = ?, SET descricao = ?, SET preco = ? WHERE id = ?";
 	
 	public void novo(Sabor sab) {
 		try {
@@ -85,6 +93,39 @@ public class SaborDAO {
 		
 	}
 	
+	public Sabor buscaPorId(Integer id) {
+		Sabor sabor = null; 
+		
+		try {
+			Connection con = DAO.conexao();
+			
+            if (!con.isClosed()) {
+            	PreparedStatement ps = 
+            	con.prepareStatement(MYSQLSELECT_ID);
+            	ps.setInt(1, id);
+            	
+            	ResultSet rs = ps.executeQuery();
+            	
+            	
+            	if (rs.next()) {
+            		
+            		sabor = new Sabor();
+            		sabor.setId( rs.getInt("id") );
+            		sabor.setNome(rs.getString("nome") );
+            		sabor.setDescricao(rs.getString("descricao"));
+            		sabor.setPreco(rs.getFloat("preco"));
+               	}
+            	
+            	con.close();
+            	
+            }
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return sabor;
+	}
+	
 	public void deletar(Integer id) {
 		try {
 			Connection con = DAO.conexao();
@@ -101,6 +142,27 @@ public class SaborDAO {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void atualizar(Sabor sab) {
+		try {
+			Connection con = DAO.conexao();
+			
+			if (!con.isClosed()) {
+				PreparedStatement ps = con.prepareStatement(MYSQLUPDATE);
+				ps.setString(1, sab.getNome());
+				ps.setString(2, sab.getDescricao());
+				ps.setFloat(3, sab.getPreco());
+				
+				ps.setInt(4, sab.getId());
+				
+				ps.execute();
+				
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
 		}
 	}
 	

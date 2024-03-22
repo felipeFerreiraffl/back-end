@@ -28,14 +28,7 @@ public class Registro extends HttpServlet {
 		SaborDAO dao = new SaborDAO();
 		dao.novo(sab);
 		
-		resp.getWriter().print("<!DOCTYPE html>"
-				+ "<html>"
-				+ "<head>"
-				+ "<meta charset='UTF-8'>"
-				+ "<title>Início</title>"
-				+ "<html>"
-				+ "<h1>Nome: " + nome + "</h1>"
-				+ "<h1>Descrição: " + desc + "</h1>"
-				+ "<h1>Preço: R$" + preco + "</h1></html>");
+		// Redirecionamento de página
+		resp.sendRedirect("/Av1_1Web/lista");
 	}
 }
