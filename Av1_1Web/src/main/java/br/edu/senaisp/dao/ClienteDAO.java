@@ -17,6 +17,17 @@ public class ClienteDAO {
 		// Variável para selecionar os valores
 		private final String MYSQLSELECT = "SELECT id, nome, telefone, rua, nr, bairro FROM cliente;";
 		
+		// Variável para selecionar os valores pelo ID
+		private final String MYSQLSELECT_ID = "SELECT id, nome, descricao, preco FROM cliente WHERE id = ?";
+		
+		// Variável para deletar os valores
+		private final String MYSQLDELETE = "DELETE FROM cliente\r\n"
+				+ "	WHERE id = ?;";
+		
+		// Variável para atualizar os valores
+		private final String MYSQLUPDATE = "UPDATE cliente\r\n"
+				+ " SET nome = ?, telefone = ?, rua = ?, nr = ?, bairro = ? WHERE id = ?";
+		
 		public void novo(Cliente cli) {
 			try {
 				Connection con = DAO.conexao();
@@ -84,5 +95,84 @@ public class ClienteDAO {
 			
 			return clientes;
 			
+		}
+		
+		public Cliente buscaPorId(int id) {
+			Cliente cli = null; 
+			
+			try {
+				Connection con = DAO.conexao();
+				
+	            if (!con.isClosed()) {
+	            	PreparedStatement ps = con.prepareStatement(MYSQLSELECT_ID);
+	            	ps.setInt(1, id);
+	            	
+	            	ResultSet rs = ps.executeQuery();
+	            	
+	            	if (rs.next()) {
+	            		
+	            		cli = new Cliente();
+	            		cli.setId( rs.getInt("id") );
+	            		cli.setNome(rs.getString("nome") );
+	            		cli.setTelefone(rs.getString("telefone"));
+	            		cli.setRua(rs.getString("rua"));
+	            		cli.setNr(rs.getInt("nr"));
+	            		cli.setBairro(rs.getString("bairro"));
+	               	}
+	            	
+	            	con.close();
+	            	
+	            }
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			return cli;
+		}
+		
+		public void deletar(int id) {
+			try {
+				Connection con = DAO.conexao();
+				
+				if (!con.isClosed()) {
+					PreparedStatement ps = con.prepareStatement(MYSQLDELETE);
+					ps.setInt(1, id);
+					
+					ps.execute();
+					
+					System.out.println("Item deletado com sucesso!");
+					
+					con.close();
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		public void atualizar(Cliente cli) {
+			try {
+				Connection con = DAO.conexao();
+				
+				if (!con.isClosed()) {
+					PreparedStatement ps = con.prepareStatement(MYSQLUPDATE);
+					ps.setString(1, cli.getNome());
+					ps.setString(2, cli.getTelefone());
+					ps.setString(3, cli.getRua());
+					ps.setInt(3, cli.getNr());
+					ps.setString(3, cli.getBairro());
+					
+					ps.setInt(4, cli.getId());
+					
+					ps.execute();
+					
+					System.out.println("Item atualizado com sucesso!");
+					
+					con.close();
+					
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				
+			}
 		}
 }

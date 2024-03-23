@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Lista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		StringBuilder html = new StringBuilder();
 		SaborDAO dao = new SaborDAO();
@@ -26,17 +27,19 @@ public class Lista extends HttpServlet {
 		html.append("<title>Lista de sabores</title>");
 		html.append("</head>");
 		html.append("<body>");
-		html.append("<a href=\'http://localhost:8080/AV1_1Web/cadastro.html\"><button type=\"button\">Novo</button></a>'");
+		html.append("<a href=\"http://localhost:8080/Av1_1Web/cadastro.html\"><button>Novo sabor</button></a>");
 		
 		for (Sabor s : dao.lista()) {
-			html.append("<h1>").append(s.getId()).append("</h1>");
-			html.append("<h2> Nome: ").append(s.getNome()).append("</2>");
+			html.append("<h2> Nome: ").append(s.getNome()).append("</h2>");
 			html.append("<h2>Descrição: ").append(s.getDescricao()).append("</h2>");
 			html.append("<h2>Preço: R$").append(s.getPreco()).append("</h2>");
-			html.append("<a href='/AV1_1Web/saborDel?id=" + s.getId() + ">");
+			html.append("<br>");
+			
+			html.append("<a href='/Av1_1Web/deletaSabor?id=" + s.getId() + "'>");
 			html.append("<button>Excluir</button>");
 			html.append("</a>");
-			html.append("<a href='/AV1_1Web/alteraDel?id=" + s.getId() + ">");
+			
+			html.append("<a href='/Av1_1Web/alteraSabor?id=" + s.getId() + "'>");
 			html.append("<button>Alterar</button>");
 			html.append("</a>");
 			html.append("<br>");

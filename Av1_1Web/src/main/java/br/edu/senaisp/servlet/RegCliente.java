@@ -35,18 +35,5 @@ public class RegCliente extends HttpServlet{
 		dao.novo(c);
 		
 		resp.sendRedirect("/Av1_1Web/listaCliente");
-		
-		resp.getWriter().print("<!DOCTYPE html>"
-				+ "<html>"
-				+ "<head>"
-				+ "<meta charset='UTF-8'>"
-				+ "<title>Início</title>"
-				+ "<html>"
-				+ "<h1>Nome: " + nome + "</h1>"
-				+ "<h1>Telefone: " + tel + "</h1>"
-				+ "<h1>Rua: " + rua + "</h1>"
-				+ "<h1>Número: " + num + "</h1>"
-				+ "<h1>Bairro: " + bairro + "</h1>"
-				+ "</html>");
 	}
 }

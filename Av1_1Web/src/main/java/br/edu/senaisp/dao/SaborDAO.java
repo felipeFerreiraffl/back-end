@@ -18,15 +18,15 @@ public class SaborDAO {
 
 	// Variável para selecionar os valores pelo ID
 	private final String MYSQLSELECT_ID = 
-	"SELECT id, nome, descricao, preco FROM sabor WHERE id = ?";		
+	"SELECT id, nome, descricao, preco FROM sabores WHERE id = ?";		
 	
 	// Variável para deletar os valores
 	private final String MYSQLDELETE = "DELETE FROM sabores\r\n"
 			+ "	WHERE id = ?;";
 	
-	// Variável para deletar os valores
+	// Variável para atualizar os valores
 	private final String MYSQLUPDATE = "UPDATE sabores\r\n"
-			+ "SET nome = ?, SET descricao = ?, SET preco = ? WHERE id = ?";
+			+ " SET nome = ?, descricao = ?, preco = ? WHERE id = ?";
 	
 	public void novo(Sabor sab) {
 		try {
@@ -93,19 +93,17 @@ public class SaborDAO {
 		
 	}
 	
-	public Sabor buscaPorId(Integer id) {
+	public Sabor buscaPorId(int id) {
 		Sabor sabor = null; 
 		
 		try {
 			Connection con = DAO.conexao();
 			
             if (!con.isClosed()) {
-            	PreparedStatement ps = 
-            	con.prepareStatement(MYSQLSELECT_ID);
+            	PreparedStatement ps = con.prepareStatement(MYSQLSELECT_ID);
             	ps.setInt(1, id);
             	
             	ResultSet rs = ps.executeQuery();
-            	
             	
             	if (rs.next()) {
             		
@@ -126,7 +124,7 @@ public class SaborDAO {
 		return sabor;
 	}
 	
-	public void deletar(Integer id) {
+	public void deletar(int id) {
 		try {
 			Connection con = DAO.conexao();
 			
@@ -158,6 +156,10 @@ public class SaborDAO {
 				ps.setInt(4, sab.getId());
 				
 				ps.execute();
+				
+				System.out.println("Item atualizado com sucesso!");
+				
+				con.close();
 				
 			}
 		} catch (Exception e) {

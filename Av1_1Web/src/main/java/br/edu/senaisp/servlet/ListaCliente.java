@@ -25,14 +25,23 @@ public class ListaCliente extends HttpServlet{
 		html.append("<title>Lista de clientes</title>");
 		html.append("<body>");
 		html.append("<head>");
+		html.append("<a href=\"http://localhost:8080/Av1_1Web/listaCliente\"><button>Novo cliente</button></a>");
 		
 		for (Cliente c : dao.lista()) {
-			html.append("<h1>").append(c.getId()).append("</h1>");
 			html.append("<h2> Nome: ").append(c.getNome()).append("</h2>");
 			html.append("<h2>Telefone: ").append(c.getTelefone()).append("</h2>");
 			html.append("<h2>Rua: ").append(c.getRua()).append("</h2>");
 			html.append("<h2>Número: ").append(c.getNr()).append("</h2>");
 			html.append("<h2>Bairro: ").append(c.getBairro()).append("</h2>");
+			
+			html.append("<a href='/Av1_1Web/deletaCliente?id=" + c.getId() + "'>");
+			html.append("<button>Excluir</button>");
+			html.append("</a>");
+			
+			html.append("<a href='/Av1_1Web/alteraCliente?id=" + c.getId() + "'>");
+			html.append("<button>Alterar</button>");
+			html.append("</a>");
+			
 			html.append("<br>");
 		}
 		
