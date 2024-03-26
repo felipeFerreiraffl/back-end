@@ -28,7 +28,7 @@ public class AlteraCliente extends HttpServlet {
 		html.append("<title>Cadastro</title>");
 		html.append("</head>");
 		html.append("<body>");
-		html.append("<form action='/Av1_1Web/alteraSabor' method='POST'>");
+		html.append("<form action='/Av1_1Web/alteraCliente' method='POST'>");
 		html.append("<h1>Cadastro de clientes</h1>");
 		
 		html.append("<input type='hidden' name='id' value='" + cli.getId() + "'>");
@@ -43,15 +43,15 @@ public class AlteraCliente extends HttpServlet {
 		html.append("<br>");
 				
 		html.append("<label for=\"rua\">Rua:</label>");
-		html.append("<input type='text' name='rua'> value='" + cli.getRua() + "'>");
+		html.append("<input type='text' name='rua' value='" + cli.getRua() + "'>");
 		html.append("<br>");
 
 		html.append("<label for=\"nr\">Número:</label>");
-		html.append("<input type='number' name='rua'> value='" + cli.getNr() + "'>");
+		html.append("<input type='number' name='nr' value='" + cli.getNr() + "'>");
 		html.append("<br>");
 
-		html.append("<label for=\"bairro\">Rua:</label>");
-		html.append("<input type='text' name='bairro'> value='" + cli.getBairro() + "'>");
+		html.append("<label for=\"bairro\">Bairro:</label>");
+		html.append("<input type='text' name='bairro' value='" + cli.getBairro() + "'>");
 		html.append("<br>");
 						
 		html.append("<button type='submit'>Gravar</button>");
@@ -66,7 +66,7 @@ public class AlteraCliente extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String nome = req.getParameter("nomeCliente");
+		String nome = req.getParameter("nome");
 		String tel  = req.getParameter("telefone");
 		String rua = req.getParameter("rua");
 		int num = Integer.parseInt(req.getParameter("nr"));
