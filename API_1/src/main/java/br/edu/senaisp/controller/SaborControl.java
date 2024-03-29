@@ -32,11 +32,11 @@ public class SaborControl extends HttpServlet {
 		SaborDAO dao = new SaborDAO();
 		List<Sabor> sabores = dao.lista();
 		
+		// Arquivo formatado e transforma objeto em texto e vice-versa
 		String json = "";
 		try {
 			// Biblioteca JSON do google
 			Gson gson = new Gson();
-			
 			// Trazendo o conteúdo json para texto
 			json = gson.toJson(sabores);
 		} catch (Exception e) {
@@ -48,6 +48,8 @@ public class SaborControl extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		SaborDAO dao = new SaborDAO();
+		
 		BufferedReader br = req.getReader();
 		
 		String json = "";
@@ -61,19 +63,46 @@ public class SaborControl extends HttpServlet {
 		// Inserção de novos itens
 		Gson gson = new Gson();
 		Sabor sabor = gson.fromJson(json, Sabor.class);
-		SaborDAO dao = new SaborDAO();
 		dao.novo(sabor);
 		
-		resp.getWriter().append("Item inserido com sucesso!");
+		resp.getWriter().append("Funcionou, bebê!");
 	}
 	
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().append("PUT");
+		SaborDAO dao = new SaborDAO();
+		
+		String tmp = req.getParameter("id");
+		int id = Integer.parseInt(tmp);
+		
+		BufferedReader br = req.getReader();
+		
+		String json = "";
+		String linha = "";
+		
+		// Loop para ler as linhas do código
+		while ((linha = br.readLine()) != null) {
+			json += linha;
+		}
+		
+		// Inserção de novos itens
+		Gson gson = new Gson();
+		Sabor sabor = gson.fromJson(json, Sabor.class);
+		sabor.setId(id);
+		dao.atualizar(sabor);
+		
+		resp.getWriter().append("Funcionou, bebê!");
 	}
 	
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().append("DELETE");
+		SaborDAO dao = new SaborDAO();
+		
+		String tmp = req.getParameter("id");
+		int id = Integer.parseInt(tmp);
+		
+		dao.deletar(id);
+		
+		resp.getWriter().append("Deletado, man");
 	}
 }
