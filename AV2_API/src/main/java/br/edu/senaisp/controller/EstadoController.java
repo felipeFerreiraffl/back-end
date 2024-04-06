@@ -17,12 +17,14 @@ public class EstadoController extends HttpServlet {
 		String nome = req.getParameter("nome");
 		String uf = req.getParameter("uf");
 		
-		Estado estado = new Estado(-1, uf, nome);
+		Estado estado = new Estado(-1, nome, uf);
+		
 		Cidade cidade = new Cidade("Salvador");
+		
 		Cidade cidade2 = new Cidade("Juazeiro");
 		
-		estado.getCidades().add(cidade);
-		estado.getCidades().add(cidade2);
+		estado.cidades.add(cidade);
+		estado.cidades.add(cidade2);
 		
 		EstadoDAO dao = new EstadoDAO();
 		int id = dao.novoCompleto(estado);

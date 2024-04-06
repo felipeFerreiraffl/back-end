@@ -3,6 +3,7 @@ package br.edu.senaisp.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import br.edu.senaisp.model.Cidade;
@@ -19,8 +20,8 @@ public class EstadoDAO {
 			if (!con.isClosed()) {
 				PreparedStatement ps = con.prepareStatement(SQLINSERT, Statement.RETURN_GENERATED_KEYS);
 
-				ps.setString(1, estado.getNome());
-				ps.setString(2, estado.getUf());
+				ps.setString(1, estado.nome);
+				ps.setString(2, estado.uf);
 
 				ps.execute();
 
@@ -35,17 +36,19 @@ public class EstadoDAO {
 		return id;
 		
 	}
-
+	
 	public int novoCompleto(Estado estado) {
 		int id = 0;
+		Connection con = null;
 		try {
-			Connection con = DAO.conexao();
-
+			con = DAO.conexao();
+			
+			con.setAutoCommit(false);
 			if (!con.isClosed()) {
 				PreparedStatement ps = con.prepareStatement(SQLINSERT, Statement.RETURN_GENERATED_KEYS);
 
-				ps.setString(1, estado.getNome());
-				ps.setString(2, estado.getUf());
+				ps.setString(1, estado.nome);
+				ps.setString(2, estado.uf);
 
 				ps.execute();
 
@@ -53,17 +56,32 @@ public class EstadoDAO {
 				rs.next();
 				id = rs.getInt(1);
 				
-				id = estado.getId();
+				id = estado.id;
 				
+				// Criação de cidades a partir do estado
 				CidadeDAO cDAO = new CidadeDAO();
-				for (Cidade cidade : estado.getCidades()) {
-					estado = cidade.getEstado();
-					cDAO.novo(cidade);
+				for (Cidade cidade : estado.cidades) {
+					cidade.estado = estado; // Pegará o estado que a cidade criada é designada
+					cDAO.novo(cidade, con);
 				}
+				
+				con.commit();
 			}
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				System.out.println(e1.getMessage());
+			}
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 		return id;
 		
