@@ -56,7 +56,7 @@ public class EstadoDAO {
 				rs.next();
 				id = rs.getInt(1);
 				
-				id = estado.id;
+				estado.id = id;
 				
 				// Criação de cidades a partir do estado
 				CidadeDAO cDAO = new CidadeDAO();
