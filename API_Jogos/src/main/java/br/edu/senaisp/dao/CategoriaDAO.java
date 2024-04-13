@@ -10,10 +10,11 @@ import br.edu.senaisp.model.Categoria;
 import br.edu.senaisp.model.Jogo;
 
 public class CategoriaDAO {
-	private final String SQLINSERT = "INSERT INTO criador (nome) VALUES (?)";
+	private final String SQLINSERT = "INSERT INTO categoria (nome) VALUES (?)";
 	
 	public int novo(Categoria cat) {
-		int id = 0;
+		int id = -1;
+		
 		Connection con = null;
 		try {
 			con = DAO.conexao();

@@ -28,7 +28,7 @@ public class CategoriaController extends HttpServlet {
 		Jogo j1 = new Jogo();
 		j1.setNome("GOD OF WAR 2");
 		j1.setPlataforma("PC / PLAYSTATION");
-		j1.setDataDeCriacao(new Date(107, 03, 17));
+		j1.setDataDeCriacao(new Date(107, 03, 17)); // O ano no Date funciona a partir de 1900, precisando somar para ter o ano correto
 		
 		cat.getJogos().add(j1);
 		
