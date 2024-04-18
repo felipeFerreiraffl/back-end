@@ -2,7 +2,6 @@ package br.edu.senaisp.controller;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import br.edu.senaisp.dao.CategoriaDAO;
@@ -21,16 +20,20 @@ public class CategoriaController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String nome = req.getParameter("nome");
+		String nomeJogo = req.getParameter("nomeJogo");
+		String plataforma = req.getParameter("plataforma");
+		Date dataCriacao = req.getParameter("dataCriacao");
 		
 		Categoria cat = new Categoria(nome);
+		Jogo jog = new Jogo(nomeJogo, plataforma, dataCriacao);
 		cat.setJogos(new ArrayList<Jogo>());
 		
-		Jogo j1 = new Jogo();
-		j1.setNome("GOD OF WAR 2");
-		j1.setPlataforma("PC / PLAYSTATION");
-		j1.setDataDeCriacao(new Date(107, 03, 17)); // O ano no Date funciona a partir de 1900, precisando somar para ter o ano correto
+		// Jogo j1 = new Jogo();
+		// j1.setNome("GOD OF WAR 2");
+		// j1.setPlataforma("PC / PLAYSTATION");
+		// j1.setDataDeCriacao(new Date(107, 03, 17)); // O ano no Date funciona a partir de 1900, precisando somar para ter o ano correto
 		
-		cat.getJogos().add(j1);
+		cat.getJogos().add(jog);
 		
 		CategoriaDAO dao = new CategoriaDAO();
 		Integer id = dao.novo(cat);

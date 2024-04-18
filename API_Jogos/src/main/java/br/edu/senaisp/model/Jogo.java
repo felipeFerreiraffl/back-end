@@ -9,6 +9,11 @@ public class Jogo {
 	private Date dataDeCriacao;
 	private Categoria categoria;
 	
+	public Jogo(String nome, String plataforma, Date dataDeCriacao) {
+		this.nome = nome;
+		this.plataforma = plataforma;
+		this.dataDeCriacao = dataDeCriacao;
+	}
 	public Integer getId() {
 		return id;
 	}
