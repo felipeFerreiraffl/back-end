@@ -35,7 +35,5 @@ public class Banda {
 	public void setAnoLancamento(int anoLancamento) {
 		this.anoLancamento = anoLancamento;
 	}
-
-	
 	
 }

@@ -7,8 +7,8 @@ import br.edu.senaisp.springDB.model.Banda;
 public interface ICrud {
 	public List<Banda> lista();
 	public Banda buscaPorId(int id);
-	public Banda altera(Banda banda, int id);
-	public Banda insere(Banda banda);
+	public Integer altera(Banda banda, int id);
+	public Integer insere(Banda banda);
 	public boolean exclui(int id);
 	
 }
